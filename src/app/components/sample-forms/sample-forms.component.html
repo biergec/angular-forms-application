@@ -1,0 +1,197 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-md-3 mt-5 text-center">
+      {{ userInfo | json }}
+    </div>
+    <div class="col-md-6">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            [(ngModel)]="userInfo.firstName"
+            #firstName="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+            required
+          />
+          <div
+            *ngIf="f.submitted && firstName.invalid"
+            class="invalid-feedback"
+          >
+            <div *ngIf="firstName.errors.required">
+              First Name is Required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            [(ngModel)]="userInfo.lastName"
+            #lastName="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }"
+            required
+          />
+          <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+            <div *ngIf="lastName.errors.required">
+              Last Name is Required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="genderInformation">Gender</label>
+          <select
+            class="form-control"
+            name="genderInformation"
+            id="genderInformation"
+            required
+            [(ngModel)]="userInfo.gender"
+          >
+            <option *ngFor="let item of genderInfo" [value]="item.genderId">{{
+              item.gender
+            }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="school">School</label>
+          <input
+            type="text"
+            class="form-control"
+            name="school"
+            [(ngModel)]="userInfo.school"
+            #school="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && school.invalid }"
+            required
+          />
+          <div *ngIf="f.submitted && school.invalid" class="invalid-feedback">
+            <div *ngIf="school.errors.required">
+              School is Required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input
+            type="text"
+            class="form-control"
+            name="country"
+            [(ngModel)]="userInfo.country"
+            #country="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && country.invalid }"
+            required
+          />
+          <div *ngIf="f.submitted && country.invalid" class="invalid-feedback">
+            <div *ngIf="country.errors.required">
+              Country is Required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="address"
+            [(ngModel)]="userInfo.address"
+            #address="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && address.invalid }"
+            required
+          ></textarea>
+          <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+            <div *ngIf="address.errors.required">
+              Address is Required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            [(ngModel)]="userInfo.email"
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+            required
+            email
+            pattern="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+          />
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is Required!</div>
+            <div *ngIf="email.errors.email">
+              Your e-mail address is not correct! Email must be a valid email
+              address!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="userInfo.password"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+            required
+            minlength="3"
+          />
+          <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="password.errors.required">
+              Password is required
+            </div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 3 characters
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary">Submit!</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <div class="custom-control custom-radio mt-5">
+        <input
+          type="radio"
+          id="clearDataRadio"
+          name="clearDataRadioGroup"
+          class="custom-control-input"
+          (click)="clearData()"
+        />
+        <label class="custom-control-label" for="clearDataRadio"
+          >Clear Data</label
+        >
+      </div>
+      <div class="custom-control custom-radio mt-2">
+        <input
+          type="radio"
+          id="tempDataRadio"
+          name="clearDataRadioGroup"
+          class="custom-control-input"
+          (click)="tempData()"
+        />
+        <label class="custom-control-label" for="tempDataRadio"
+          >Temp Data</label
+        >
+      </div>
+    </div>
+  </div>
+</div>
